@@ -17,6 +17,7 @@
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
+                        <th>Lojas</th>
                         <th>Valor</th>
                         <th>Ações</th>
                     </tr>
@@ -29,6 +30,12 @@
                         <td><span th:text="${produto.nome}"> Nome </span></td>
                         <td><span th:text="${produto.descricao}"> Descrição </span></td>
                         <td><span th:text="${produto.categoria.nome}"> Categoria </span></td>
+                        <td>
+                            <th:block th:each="loja, iter: ${produto.lojas}">
+                                <label th:text="${loja.nome}"/>
+                                <th:block th:if="${!iter.last}">, </th:block>
+                            </th:block>
+                        </td>
                         <td><span th:text="${produto.valor}"> Valor </span></td>
                         <td>
                            <form th:action="@{/produtos/{id}(id=${produto.id})}" th:object="${produto}" method="post">

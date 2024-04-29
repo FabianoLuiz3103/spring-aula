@@ -30,13 +30,9 @@ public class ProdutoController {
     @Autowired
     private LojaService lojaService;
 
-
-    //URL - localhost:8080/produtos/form
-    @GetMapping("/form")
-    public String loadForm(Model model) {
-        model.addAttribute("produto", new Produto());
-        //model.addAttribute("categorias", categoriaRepository.findAll()); usando isso retorna só para novo produto
-        return "produto/novo-produto";
+    @ModelAttribute("lojas")
+    public List<Loja> lojas(){
+        return lojaService.findAll();
     }
 
     /*
@@ -48,9 +44,14 @@ public class ProdutoController {
         return categoriaService.findAll();
     }
 
-    @ModelAttribute("lojas")
-    public List<Loja> lojas(){
-        return lojaService.findAll();
+
+
+    //URL - localhost:8080/produtos/form
+    @GetMapping("/form")
+    public String loadForm(Model model) {
+        model.addAttribute("produto", new Produto());
+        //model.addAttribute("categorias", categoriaRepository.findAll()); usando isso retorna só para novo produto
+        return "produto/novo-produto";
     }
 
     @PostMapping()
