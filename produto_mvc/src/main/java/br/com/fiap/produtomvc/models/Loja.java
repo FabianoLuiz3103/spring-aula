@@ -29,16 +29,16 @@ public class Loja {
     @ManyToMany(mappedBy = "lojas", fetch = FetchType.EAGER)
     private Set<Produto> produtos = new HashSet<>(); //Não permite valores duplicados
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Loja loja = (Loja) o;
-//        return Objects.equals(id, loja.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Loja loja = (Loja) o;
+        return Objects.equals(id, loja.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

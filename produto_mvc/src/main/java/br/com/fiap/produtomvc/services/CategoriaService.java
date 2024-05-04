@@ -1,5 +1,6 @@
 package br.com.fiap.produtomvc.services;
 
+import br.com.fiap.produtomvc.dto.CategoriaDTO;
 import br.com.fiap.produtomvc.models.Categoria;
 import br.com.fiap.produtomvc.repository.CategoriaRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -23,46 +25,43 @@ public class CategoriaService {
     Método que cadastra uma nova categoria
      */
     @Transactional
-    public Categoria insert(Categoria categoria){
-        return repository.save(categoria);
+    public CategoriaDTO insert(CategoriaDTO dto){
+        Categoria entity = new Categoria();
+        dtoToEntity(dto, entity);
+        repository.save(entity);
+        return new CategoriaDTO(entity);
     }
 
     /*
     Método que retorna uma lista de categorias
      */
     @Transactional(readOnly = true)
-    public List<Categoria> findAll(){
-        return repository.findAll();
+    public List<CategoriaDTO> findAll(){
+        List<Categoria> list = repository.findAll();
+        return list.stream().map(CategoriaDTO::new).collect(Collectors.toList());
     }
 
     /*
     Método que recupera por id
      */
     @Transactional(readOnly = true)
-    public Categoria findById(Long id){
+    public CategoriaDTO findById(Long id){
         Categoria categoria = repository.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("Categoria não encontrada com id: " + id)
         );
-        return categoria;
+        return new CategoriaDTO(categoria);
     }
 
     @Transactional
-    public Categoria update(Long id, Categoria entity){
+    public CategoriaDTO update(Long id, CategoriaDTO dto){
         try{
             Categoria categoria = repository.getReferenceById(id);
-            copyToCategoria(entity, categoria);
+            dtoToEntity(dto, categoria);
             categoria = repository.save(categoria);
-            return categoria;
+            return new CategoriaDTO(categoria);
         }catch (EntityNotFoundException ex){
             throw new IllegalArgumentException("Categoria não encontrada!");
         }
-    }
-
-    /*
-    Método privado que faz a alteração do nome da categoria, recebendo o nome antigo e o novo.
-     */
-    private void copyToCategoria(Categoria entity, Categoria categoria){
-        categoria.setNome(entity.getNome());
     }
 
     @Transactional
@@ -75,5 +74,9 @@ public class CategoriaService {
         }catch (DataIntegrityViolationException e){
             throw new IllegalArgumentException("Falha de integridade referencial para o id: " + id);
         }
+    }
+
+    private void dtoToEntity(CategoriaDTO dto, Categoria entity){
+        entity.setNome(dto.getNome());
     }
 }

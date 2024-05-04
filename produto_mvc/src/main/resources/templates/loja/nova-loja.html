@@ -6,12 +6,12 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Editar</h1>
+<h1>Nova Loja</h1>
 <div layout:fragment="conteudo">
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2>Alteração de categoria</h2>
+                <h2>Nova loja</h2>
                 <!--  verifica se a mensagem não é nula, se existe na requisição (chave,valor) -->
                 <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -20,9 +20,8 @@
                 </div>
                 <!--  th:action - vai encaminhar para o mapeamento /usuario/salvar -->
                 <!--  th:object faz referencia ao obj -  th:object="${produto} - é o objeto enviado pelo controller - chave -->
-                 <!--Editar -->
-                <form action="#" th:action="@{/categorias/{id}(id=${categoriaDTO.id})}" th:object="${categoriaDTO}" method="post">
-                    <input type="hidden" name="_method" value="put">
+                <!--Editar -->
+                <form action="#" th:action="@{/lojas}" th:object="${lojaDTO}" method="post">
                     <div class="row mb-3">
                         <label for="nome" class="col-sm-1 col-form-label">Nome:</label>
                         <div class="col-sm-5">
@@ -36,7 +35,7 @@
                         </div>
                     </div>
 
-                    <input class="btn btn-primary" type="submit" value="Alterar" />
+                    <input class="btn btn-primary" type="submit" value="Cadastrar" />
                 </form>
 
             </div>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Lista de Produtos</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 th:text="${nomeLoja}"></h1>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Loja</th>
+                        <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${produtos.empty}">
+                        <td colspan="4">Lista de produtos vazia</td>
+                    </tr>
+                    <tr th:each="produto : ${produtos}" >
+                        <td><span th:text="${produto.nome}"> Nome </span></td>
+                        <td><span th:text="${produto.descricao}"> Descrição </span></td>
+                        <td><span th:text="${produto.categoria.nome}"> Categoria </span></td>
+                        <td><span th:text="${nomeLoja}"> Nome Loja</span></td>
+                        <td><span th:text="${produto.valor}"> Valor </span></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

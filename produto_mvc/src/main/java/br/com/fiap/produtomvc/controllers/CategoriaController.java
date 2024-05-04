@@ -1,5 +1,6 @@
 package br.com.fiap.produtomvc.controllers;
 
+import br.com.fiap.produtomvc.dto.CategoriaDTO;
 import br.com.fiap.produtomvc.models.Categoria;
 import br.com.fiap.produtomvc.models.Produto;
 import br.com.fiap.produtomvc.repository.CategoriaRepository;
@@ -26,12 +27,12 @@ public class CategoriaController {
 
     @GetMapping("/form")
     public String loadFormCategoria(Model model){
-        model.addAttribute("categoria", new Categoria());
+        model.addAttribute("categoriaDTO", new CategoriaDTO());
         return "categoria/nova-categoria";
     }
 
     @PostMapping
-    public String insert(@Valid Categoria categoria,
+    public String insert(@Valid CategoriaDTO categoria,
                          BindingResult result,
                          RedirectAttributes atributes){
         if(result.hasErrors()){
@@ -48,23 +49,23 @@ public class CategoriaController {
     //Carregar categorias
     @GetMapping
     public String findAll(Model model){
-        List<Categoria> categorias = service.findAll();
-        model.addAttribute("categorias", categorias);
+        List<CategoriaDTO> categorias = service.findAll();
+        model.addAttribute("categoriasDTO", categorias);
         return "/categoria/listar-categorias";
     }
 
     //Carregar categoria para edição
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model){
-        Categoria categoria = service.findById(id);
-        model.addAttribute("categoria", categoria);
+        CategoriaDTO categoria = service.findById(id);
+        model.addAttribute("categoriaDTO", categoria);
         return "/categoria/editar-categoria";
     }
 
     //Receber edição da categoria
     @PutMapping("/{id}")
     public String upadte(@PathVariable("id") Long id,
-                         @Valid Categoria categoria,
+                         @Valid CategoriaDTO categoria,
                          BindingResult result){
 
         if(result.hasErrors()){
