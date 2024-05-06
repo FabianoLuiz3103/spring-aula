@@ -55,7 +55,7 @@ public class LojaController {
     @GetMapping("/prods/{id}")
     public String findByLoja(@PathVariable("id") Long id,
                            Model model){
-        model.addAttribute("produtos", produtoService.findByLoja(id));
+        model.addAttribute("produtosDTO", produtoService.findByLoja(id));
         model.addAttribute("nomeLoja", lojaService.findById(id).getNome());
         return "produto/listar-produtos-loja";
     }

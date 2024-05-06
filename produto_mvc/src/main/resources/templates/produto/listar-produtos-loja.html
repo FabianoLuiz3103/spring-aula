@@ -22,15 +22,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:if="${produtos.empty}">
+                    <tr th:if="${produtosDTO.empty}">
                         <td colspan="4">Lista de produtos vazia</td>
                     </tr>
-                    <tr th:each="produto : ${produtos}" >
-                        <td><span th:text="${produto.nome}"> Nome </span></td>
-                        <td><span th:text="${produto.descricao}"> Descrição </span></td>
-                        <td><span th:text="${produto.categoria.nome}"> Categoria </span></td>
+                    <tr th:each="produtoDTO : ${produtosDTO}" >
+                        <td><span th:text="${produtoDTO.nome}"> Nome </span></td>
+                        <td><span th:text="${produtoDTO.descricao}"> Descrição </span></td>
+                        <td><span th:text="${produtoDTO.categoria.nome}"> Categoria </span></td>
                         <td><span th:text="${nomeLoja}"> Nome Loja</span></td>
-                        <td><span th:text="${produto.valor}"> Valor </span></td>
+                        <td><span th:text="${produtoDTO.valor}"> Valor </span></td>
 
                     </tr>
                     </tbody>

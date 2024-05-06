@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     <span th:text="${mensagem}"></span>
                 </div>
-                <form action="#" th:action="@{/produtos}" th:object="${produto}" method="post">
+                <form action="#" th:action="@{/produtos}" th:object="${produtoDTO}" method="post">
                     <div class="row mb-3">
                         <label for="nome" class="col-sm-1 col-form-label">Nome:</label>
                         <div class="col-sm-5">

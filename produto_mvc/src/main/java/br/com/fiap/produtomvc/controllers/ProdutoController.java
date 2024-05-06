@@ -2,6 +2,7 @@ package br.com.fiap.produtomvc.controllers;
 
 import br.com.fiap.produtomvc.dto.CategoriaDTO;
 import br.com.fiap.produtomvc.dto.LojaDTO;
+import br.com.fiap.produtomvc.dto.ProdutoDTO;
 import br.com.fiap.produtomvc.models.Categoria;
 import br.com.fiap.produtomvc.models.Loja;
 import br.com.fiap.produtomvc.models.Produto;
@@ -51,19 +52,19 @@ public class ProdutoController {
     //URL - localhost:8080/produtos/form
     @GetMapping("/form")
     public String loadForm(Model model) {
-        model.addAttribute("produto", new Produto());
+        model.addAttribute("produtoDTO", new ProdutoDTO());
         //model.addAttribute("categorias", categoriaRepository.findAll()); usando isso retorna só para novo produto
         return "produto/novo-produto";
     }
 
     @PostMapping()
-    public String insert(@Valid Produto produto,
+    public String insert(@Valid ProdutoDTO produtoDto,
                                 BindingResult result,
                                 RedirectAttributes attributes) {
         if(result.hasErrors()){
             return "produto/novo-produto";
         }
-        produtoService.insert(produto);
+        produtoService.insert(produtoDto);
         attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso");
         return "redirect:/produtos/form";
     }
@@ -71,26 +72,26 @@ public class ProdutoController {
     //URL - localhost:8080/produtos/listar
     @GetMapping()
     public String findAll(Model model){
-        model.addAttribute("produtos", produtoService.findAll());
+        model.addAttribute("produtosDTO", produtoService.findAll());
         return "/produto/listar-produtos"; //View
     }
 
     //URL - localhost:8080/produtos/produtos/1
     @GetMapping("/{id}")
     public String findById(@PathVariable ("id") Long id, Model model ){
-        model.addAttribute("produto", produtoService.findById(id));
+        model.addAttribute("produtoDTO", produtoService.findById(id));
         return "/produto/editar-produto";
     }
 
     //URL - localhost:8080/produtos/editar/1
     @PutMapping("/{id}")
-    public String update(@PathVariable("id") Long id, @Valid Produto produto,
+    public String update(@PathVariable("id") Long id, @Valid ProdutoDTO produtoDto,
                                 BindingResult result){
         if(result.hasErrors()){
-            produto.setId(id);
+            produtoDto.setId(id);
             return "/produto/editar-produto";
         }
-        produtoService.update(id, produto);
+        produtoService.update(id, produtoDto);
         return "redirect:/produtos";
     }
 
