@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Editar-Empregado</title>
+</head>
+<body>
+<h1>Alteração de empregado</h1>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div class="shadow-lg card mb-3 mt-5" style="width: 45rem;">
+                        <div class="card-header">
+                            <h3 class="text-center text-uppercase fw-normal" >Alteração de empregado</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <form action="#" th:action="@{/empregados/{id}(id=${empregadoDTO.id})}" th:object="${empregadoDTO}" method="post">
+                                <input type="hidden" name="_method" value="put">
+                                <div class="row mb-3">
+                                    <label for="nome" class="col-sm-3 ms-2 col-form-label text-uppercase">Nome:</label>
+                                    <div class="col-sm-8">
+                                        <input id="nome" class="form-control" type="text" th:field="*{nome}" placeholder="Ex: João Caetano"/>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="email" class="col-sm-3 ms-2 col-form-label text-uppercase">Email:</label>
+                                    <div class="col-sm-8">
+                                        <input id="email" class="form-control" type="text" th:field="*{email}" placeholder="Ex: joao@example.com">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="salario" class="col-sm-3 ms-2 col-form-label text-uppercase">Salário:</label>
+                                    <div class="col-sm-8">
+                                        <input id="salario" class="form-control" type="text" th:field="*{salario}" placeholder="Ex: 1000.00">
+                                    </div>
+                                    <div class="col-sm-8">
+								<span class="mensagem" th:if="${#fields.hasErrors('salario')}"
+                                      th:errors="*{salario}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-3 ms-2 col-form-label text-uppercase"> Departamento:</label>
+                                        <div class="col-sm-8">
+                                            <select class="chosen-select form-control" data-placehold="departamento" id="departamento"
+                                                    name="departamento" th:field="*{departamento}">
+                                                <option th:each="departamentoDTO : ${departamentosDTO}"
+                                                        th:text="${departamentoDTO.nome}"
+                                                        th:value="${departamentoDTO.id}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-8">
+                                <span class="mensagem" th:errors="*{departamento}"
+                                      th:if="${#fields.hasErrors('departamento')}">
+                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-3 ms-2 col-form-label text-uppercase">Projetos:</label>
+                                        <div class="col-sm-8">
+                                            <select class="chosen-select form-control" data-placehold="projetos" id="projetos" multiple="true"
+                                                    name="projetos" th:field="${empregadoDTO.projetos}">
+                                                <option th:each="projetoDTO :${projetosDTO}"
+                                                        th:text="${projetoDTO.nome}"
+                                                        th:value="${projetoDTO.id}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-8">
+								<span class="mensagem" th:errors="*{projetos}"
+                                      th:if="${#fields.hasErrors('projetos')}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-evenly">
+                                    <input class="btn btn-success" type="submit" value="Salvar" />
+                                    <input class="btn btn-warning" type="reset" value="Limpar" />
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -21,7 +21,7 @@ import java.util.Set;
 
 //Anotações JPA
 @Entity
-@Table(name = "tbl_projetos")
+@Table(name = "tbl_projeto")
 public class Projeto {
 
     @Id
@@ -33,5 +33,5 @@ public class Projeto {
     private String nome;
 
     @ManyToMany(mappedBy = "projetos", fetch = FetchType.EAGER)
-    private Set<Projeto> empregados = new HashSet<>();
+    private Set<Empregado> empregados = new HashSet<>();
 }

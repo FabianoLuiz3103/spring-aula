@@ -50,16 +50,15 @@ public class EmpregadoService {
     public List<EmpregadoDTO> findByDepartamento(Long idDepart) {
         return empregadoRepository.findAll()
                 .stream()
-                .filter(e -> e.getDepartamento().equals(idDepart))
+                .filter(e -> e.getDepartamento().getId().equals(idDepart))
                 .map(EmpregadoDTO::new)
                 .collect(Collectors.toList());
     }
 
-
     @Transactional
     public EmpregadoDTO update(Long id, EmpregadoDTO empregadoDTO){
         try{
-            Empregado entity = new Empregado();
+            Empregado entity = empregadoRepository.getReferenceById(id);
             dtoToEntity(empregadoDTO, entity);
             entity = empregadoRepository.save(entity);
             return new EmpregadoDTO(entity);

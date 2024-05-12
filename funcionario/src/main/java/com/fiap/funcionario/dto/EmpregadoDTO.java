@@ -27,7 +27,7 @@ public class EmpregadoDTO {
     private String email;
     @NotNull(message = "Campo requerido! ")
     @Positive(message = "O salário deve ser positivo! ")
-    private double salario;
+    private Double salario;
     private Departamento departamento;
     private Set<Projeto> projetos = new HashSet<>();
 

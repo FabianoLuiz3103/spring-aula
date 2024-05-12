@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Lista de projetos</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="m-5 text-center text-uppercase">Lista de projetos do <span th:text="${nomeEMPT}"></span></h3>
+                <table class="table table-bordered border-dark">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${projetosDTO.empty}">
+                        <td colspan="4">Lista de projetos vazia</td>
+                    </tr>
+                    <tr th:each="projetoDTO : ${projetosDTO}" >
+                        <td><span th:text="${projetoDTO.nome}"> Nome </span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Lista de Empregados</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="mt-5 text-center text-uppercase">Lista de empregados do departamento</h3>
+                <h3 class="mb-5 text-center text-uppercase"><span th:text="${nomeDPT}"></span></h3>
+                <table class="table table-bordered border-dark">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Salario</th>
+                        <th>Departamento</th>
+                        <th>Projetos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${empregadosDTO.empty}">
+                        <td colspan="4">Lista de empregados vazia</td>
+                    </tr>
+                    <tr th:each="empregadoDTO : ${empregadosDTO}" >
+                        <td><span th:text="${empregadoDTO.nome}"> Nome </span></td>
+                        <td><span th:text="${empregadoDTO.email}"> Email </span></td>
+                        <td><span th:text="${empregadoDTO.salario}"> Salario </span></td>
+                        <td><span th:text="${empregadoDTO.departamento.nome}"> Departamento </span></td>
+                        <td style="text-align: center;">
+                            <form th:action="@{/projetos/pjts/{id}(id=${empregadoDTO.id})}" th:object="${empregadoDTO}" method="get">
+
+                                <input class="btn btn-success btn-xs" type="submit" value="Ver projetos">
+
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

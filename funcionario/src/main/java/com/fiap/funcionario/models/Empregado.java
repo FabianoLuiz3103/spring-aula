@@ -19,7 +19,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"id"})
 //Anotações JPA
 @Entity
-@Table(name = "tbl_empregados")
+@Table(name = "tbl_empregado")
 public class Empregado {
 
     @Id
@@ -43,7 +43,7 @@ public class Empregado {
     private Departamento departamento;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_empregado_projeto",
+    @JoinTable(name = "tbl_empregado_projeto",
     joinColumns = @JoinColumn(name="empregado_id"),
     inverseJoinColumns = @JoinColumn(name="projeto_id"))
     private Set<Projeto> projetos = new HashSet<>();

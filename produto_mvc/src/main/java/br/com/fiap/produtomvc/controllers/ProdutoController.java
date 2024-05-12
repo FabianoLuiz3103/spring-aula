@@ -83,6 +83,14 @@ public class ProdutoController {
         return "/produto/editar-produto";
     }
 
+    @GetMapping("/prods/{id}")
+    public String findByLoja(@PathVariable("id") Long id,
+                             Model model){
+        model.addAttribute("produtosDTO", produtoService.findByLoja(id));
+        model.addAttribute("nomeLoja", lojaService.findById(id).getNome());
+        return "produto/listar-produtos-loja";
+    }
+
     //URL - localhost:8080/produtos/editar/1
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @Valid ProdutoDTO produtoDto,

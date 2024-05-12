@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Editar-Departamento</title>
+</head>
+<body>
+<h1>Alterar departamento</h1>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <span th:text="${mensagem}"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="shadow-lg card mb-3 mt-5" style="width: 45rem;">
+                        <div class="card-header">
+                            <h3 class="text-center text-uppercase fw-normal" >Alteração de departamento</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" th:action="@{/departamentos/{id}(id=${departamentoDTO.id})}" th:object="${departamentoDTO}" method="post">
+                                <input type="hidden" name="_method" value="put">
+                                <div class="row mb-3">
+                                    <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+                                    <div class="col-sm-8">
+                                        <input id="nome" class="form-control" type="text" th:field="*{nome}" placeholder="Ex: Financeiro"/>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-evenly">
+                                    <input class="btn btn-success" type="submit" value="Salvar" />
+                                    <input class="btn btn-warning" type="reset" value="Limpar" />
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

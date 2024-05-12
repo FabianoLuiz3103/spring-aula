@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Home</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        bd{
+            display: grid;
+            justify-content: center;
+            align-content: center;
+        }
+        .cont{
+            width: 600px;
+            height: 150px;
+            background:rgba(255, 255, 255, 0);;
+            border-radius: 20px;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cont div, h2, span {
+        z-index: 1;
+        }
+        .cont::before{
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 600px;
+            left 75px;
+            top: -100px;
+            background: linear-gradient(#00e5ff, #b400fb);
+            animation: animate 10s linear infinite;
+        }
+
+        @KeyFrames animate {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        .cont::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: #fff;
+            border-radius: 18px;
+
+        }
+      .texto {
+        position: absolute;
+        white-space: nowrap;
+        animation: moveText 10s linear infinite;
+        left: 0;
+    }
+
+    @keyframes moveText {
+         0% {
+            left: -100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+
+    </style>
+</head>
+<body>
+<div class="bd">
+    <div layout:fragment="conteudo">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <div class="cont shadow-lg">
+                            <div class="mb-5 piscante">
+                                <h2 class="fs-2 fw-bold texto text-uppercase ms-1" th:text="${msg}"></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
+
+

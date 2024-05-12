@@ -36,7 +36,7 @@ public class LojaController {
         }
         dto = lojaService.insert(dto);
         redirect.addFlashAttribute("mensagem", "Loja cadastrada com sucesso!");
-        return "/lojas/form";
+        return "redirect/lojas/form";
     }
 
     @GetMapping
@@ -52,14 +52,6 @@ public class LojaController {
         return "loja/editar-loja";
     }
 
-    @GetMapping("/prods/{id}")
-    public String findByLoja(@PathVariable("id") Long id,
-                           Model model){
-        model.addAttribute("produtosDTO", produtoService.findByLoja(id));
-        model.addAttribute("nomeLoja", lojaService.findById(id).getNome());
-        return "produto/listar-produtos-loja";
-    }
-
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id,
                          @Valid LojaDTO dto,
@@ -69,13 +61,13 @@ public class LojaController {
             return "loja/editar-loja";
         }
         dto = lojaService.update(id, dto);
-        return "/lojas";
+        return "redirect:/lojas";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         lojaService.delete(id);
-        return "/lojas";
+        return "redirect:/lojas";
     }
 
 
