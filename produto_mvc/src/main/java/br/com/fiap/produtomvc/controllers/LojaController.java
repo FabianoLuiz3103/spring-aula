@@ -36,7 +36,7 @@ public class LojaController {
         }
         dto = lojaService.insert(dto);
         redirect.addFlashAttribute("mensagem", "Loja cadastrada com sucesso!");
-        return "redirect/lojas/form";
+        return "redirect:/lojas/form";
     }
 
     @GetMapping
